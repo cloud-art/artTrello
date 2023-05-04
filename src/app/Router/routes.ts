@@ -1,10 +1,9 @@
 import IRouter from '../../types/IRouter';
 
-import { HOMEPAGE_ROUTE } from '../../utils/consts';
+import { HOMEPAGE_ROUTE } from '../../constants/routes'
 
-import Homepage from '../../components/Pages/Homepage';
+import Homepage from '../../components/pages/Homepage';
 
-export const authRoutes: Array<IRouter> = [];
 export const publicRoutes: Array<IRouter> = [
     {
         path: HOMEPAGE_ROUTE,

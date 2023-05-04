@@ -1,0 +1,23 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    color: var(--color-white);
+    background-color: var(--color-brown-dark);
+}
+
+.left{
+    display: flex;
+    align-items: center;
+}
+
+.right{
+    display: flex;
+}
+
+.item{
+    &:not(:last-child){
+        margin-right: 10px;
+    }
+}
