@@ -1,0 +1,24 @@
+.openButton{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    padding: 6px 10px !important;
+    border-radius: 3px;
+    transition: 0.1s;
+
+    &:hover{
+        background-color: rgba($color: var(--color-brown-rgb-value), $alpha: 0.5) !important; 
+    }
+    &Open{
+        background-color: rgba($color: var(--color-brown-rgb-value), $alpha: 0.5) !important; 
+        &:hover{
+            background-color: var(--color-brown) !important;
+        }
+    }
+}
+
+.image{
+    font-size: 18px;
+    padding-left: 5px;
+}
