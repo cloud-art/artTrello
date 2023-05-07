@@ -1,7 +1,4 @@
 import React from 'react'
-import s from './index.module.scss'
-import Button from '../../../Button'
-import classNames from 'classnames';
 
 interface ButtonWrapperProps {
     isOpen: boolean;

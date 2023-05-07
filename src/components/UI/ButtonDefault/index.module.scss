@@ -8,12 +8,12 @@
     transition: 0.1s;
 
     &:hover{
-        background-color: rgba($color: var(--color-brown-rgb-value), $alpha: 0.5) !important; 
+        background-color: var(--color-brown-light)!important; 
     }
-    &Open{
-        background-color: rgba($color: var(--color-brown-rgb-value), $alpha: 0.5) !important; 
+    &Active{
+        background-color: var(--color-brown) !important;
         &:hover{
-            background-color: var(--color-brown) !important;
+            background-color: var(--color-brown-light) !important;
         }
     }
 }
