@@ -17,6 +17,13 @@
         visibility: visible;
     }
 
+    &Right{
+        position: absolute;
+        top: 45px;
+        left: auto;
+        right: 0; 
+    }
+
     @media (max-width: 768px) {
         display: none;
     }
