@@ -11,6 +11,7 @@
     border-radius: 5px;
     background-color: var(--color-white);
     transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
 
     &Open {
         opacity: 1;
