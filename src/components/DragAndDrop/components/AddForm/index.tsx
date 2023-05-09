@@ -28,6 +28,7 @@ const AddForm: React.FC<AddFormProps> = ({ title, addItemHandler, addBoardHandle
             addBoardHandler &&
                 addBoardHandler(value)
             setValue('')
+            setFormVisible(false)
         }
         else setError(true)
     }
