@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import logoImage from '../../../assets/logo1.svg'
+import logoImage from '../../../assets/logo.svg'
 import s from './index.module.scss'
 import { HOMEPAGE_ROUTE } from '../../../constants/routes';
 
