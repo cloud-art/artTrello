@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import s from './index.module.scss'
 import { IBoard, IBoardItem } from '../../types/IBoard'
 import Item from './components/Item'
+import Board from './components/Board'
+import AddBoard from './components/AddBoard'
+import classNames from 'classnames'
 
-type Props = {}
+type DragAndDropProps = {
+    classname?: string,
+}
 
-const DragAndDrop = (props: Props) => {
+const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     const [boards, setBoards] = useState<Array<IBoard>>([
         {
             id: 1, title: "Блок 1", items: [
@@ -29,8 +34,38 @@ const DragAndDrop = (props: Props) => {
             ],
         }
     ])
-    const [currentBoard, setCurrentBoard] = useState<IBoard | null>(null)
-    const [currentItem, setCurrentItem] = useState<IBoardItem | null>(null)
+
+    const addItemHandler = (boardId: number, item: IBoardItem) => {
+        setBoards(boards.map(b => {
+            if (b.id == boardId) {
+                b.items.splice(b.items.length, 0, item)
+            }
+            return b
+        }))
+    }
+
+    const deleteItemHandler = (boardId: number, itemId: number) => {
+        setBoards(boards.map(b => {
+            if (b.id === boardId) {
+                const itemIndex = b.items.findIndex(element => element.id === itemId)
+                b.items.splice(itemIndex, 1)
+            }
+            return b
+        }))
+    }
+
+    const addBoardHandler = (title: string) => {
+        let boardId = Math.max(...boards.map(e => { return e.id })) + 1
+        setBoards([...boards, { id: boardId, title: title, items: [] }])
+    }
+
+    const deleteBoardHandler = (boardId: number) => {
+        setBoards([...boards].filter(b => b.id !== boardId))
+    }
+
+    const [grabbedBoard, setGrabbedBoard] = useState<IBoard | null>(null)
+    const [grabbedItem, setGrabbedItem] = useState<IBoardItem | null>(null)
+    const [grabbedItemBoard, setGrabbedItemBoard] = useState<IBoard | null>(null)
 
     const dragItemOverHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         // e.preventDefault()
@@ -38,36 +73,36 @@ const DragAndDrop = (props: Props) => {
 
     const dragItemEnterHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard, item: IBoardItem) => {
         e.preventDefault();
-        if (!currentBoard || !currentItem) return
+        if (!grabbedItemBoard || !grabbedItem) return
         //элемент под курсором становится placeholder
         // если это другая доска, удаляем из предыдущей элемент и вставляем его в эту доску
         (e.target as HTMLElement).classList.add(s.placeholder)
         // если это другая доска, удаляем из предыдущей элемент и вставляем его в эту доску
-        if (board.id !== currentBoard.id) {
+        if (board.id !== grabbedItemBoard.id) {
             // индекс элемента на который мы навелись
             const indexEnter = board.items.indexOf(item)
             setBoards(boards.slice().map(b => {
                 //удаляем текущей элемент на прошлой доске
-                if (b.id == currentBoard?.id) {
-                    const index = b.items.indexOf(currentItem)
+                if (b.id == grabbedItemBoard.id) {
+                    const index = b.items.indexOf(grabbedItem)
                     b.items.splice(index, 1)
                 }
                 // добавляем на текущую доску элемент
                 else if (b.id === board.id)
-                    currentItem && b.items.splice(indexEnter, 0, currentItem)
+                    b.items.splice(indexEnter, 0, grabbedItem)
                 return b
             }))
             //меняем текущую доску
-            setCurrentBoard(board)
+            setGrabbedItemBoard(board)
         }
         //если это та же доска, ставим элемент на место прошлого
-        if (board.id === currentBoard.id) {
+        if (board.id === grabbedItemBoard.id) {
             setBoards(boards.slice().map(b => {
-                if (b.id == currentBoard?.id) {
-                    const currIndex = b.items.indexOf(currentItem);
+                if (b.id == grabbedItemBoard.id) {
+                    const currIndex = b.items.indexOf(grabbedItem);
                     const itemIndex = b.items.indexOf(item);
                     b.items.splice(currIndex, 1)
-                    b.items.splice(itemIndex, 0, currentItem)
+                    b.items.splice(itemIndex, 0, grabbedItem)
                 }
                 return b
             }))
@@ -80,22 +115,22 @@ const DragAndDrop = (props: Props) => {
     }
     const dragItemStartHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard, item: IBoardItem) => {
         //инициализируем взятый элемент и доску над которой мы двигаемся
-        setCurrentBoard(board)
-        setCurrentItem(item);
+        setGrabbedItemBoard(board)
+        setGrabbedItem(item);
         // setDraggedType('IBoardItem')
         // e.dataTransfer
     }
     const dragItemEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
         //очищаем state
-        setCurrentBoard(null)
-        setCurrentItem(null)
+        setGrabbedItemBoard(null)
+        setGrabbedItem(null)
     }
     const dropItemHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard, item: IBoardItem) => {
         // e.preventDefault();
         //убираем placeholder и очищаем state
         (e.target as HTMLElement).classList.remove(s.placeholder)
-        setCurrentBoard(null)
-        setCurrentItem(null)
+        setGrabbedItemBoard(null)
+        setGrabbedItem(null)
     }
 
     const dragBoardOverHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
@@ -103,15 +138,15 @@ const DragAndDrop = (props: Props) => {
     }
     const dragBoardEnterHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         e.preventDefault()
-        if (!currentBoard) return
-        //элемент под мышкой становится placeholder 
+        if (grabbedBoard == null) return
+        // элемент под мышкой становится placeholder
         (e.target as HTMLElement).parentElement?.classList.add(s.board__placeholder)
         //Меняем местами взятый элемент и тот, под которым находимся
-        const currentIndex = boards.indexOf(currentBoard)
+        const currentIndex = boards.indexOf(grabbedBoard)
         const boardIndex = boards.indexOf(board)
         const newBoards = [...boards]
         newBoards.splice(currentIndex, 1)
-        newBoards.splice(boardIndex, 0, currentBoard)
+        newBoards.splice(boardIndex, 0, grabbedBoard)
         setBoards(newBoards)
     }
     const dragBoardLeaveHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
@@ -121,52 +156,84 @@ const DragAndDrop = (props: Props) => {
     }
     const dragBoardStartHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         // e.preventDefault()
-        setCurrentBoard(board)
+        setGrabbedBoard(board)
     }
     const dragBoardEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
         //очищаем state
-        setCurrentBoard(null)
+        setGrabbedBoard(null)
     }
     const dropBoardHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         e.preventDefault();
         //убираем placeholder и очищаем state
         (e.target as HTMLElement).parentElement?.classList.remove(s.board__placeholder)
-        setCurrentBoard(null)
+        setGrabbedBoard(null)
     }
 
     return (
-        <div className={s.dragAndDrop}>
+        <div className={classNames(classname, s.dragAndDrop)}>
             {boards.map(board =>
-                <div className={s.board}>
-                    <div className={s.board__header}
-                        onDragOver={(e) => dragBoardOverHandler(e, board)}
-                        onDragEnter={(e) => dragBoardEnterHandler(e, board)}
-                        onDragLeave={(e) => dragBoardLeaveHandler(e, board)}
-                        onDragStart={(e) => dragBoardStartHandler(e, board)}
-                        onDragEnd={(e) => dragBoardEndHandler(e)}
-                        onDrop={(e) => dropBoardHandler(e, board)}
-                        draggable={true}
-                    >
-                        {board.title}
-                    </div>
-                    <div className={s.board__content}>
-                        {board.items.map(item =>
-                            <Item
-                                onDragOver={(e) => dragItemOverHandler(e, board)}
-                                onDragEnter={(e) => dragItemEnterHandler(e, board, item)}
-                                onDragLeave={(e) => dragItemLeaveHandler(e, board, item)}
-                                onDragStart={(e) => dragItemStartHandler(e, board, item)}
-                                onDragEnd={(e) => dragItemEndHandler(e)}
-                                onDrop={(e) => dropItemHandler(e, board, item)}
-                                text={item.title}
-                                draggable={true}
-                            />
-                        )}
-                    </div>
-                </div>
+                <Board
+                    onDragOver={(e) => dragBoardOverHandler(e, board)}
+                    onDragEnter={(e) => dragBoardEnterHandler(e, board)}
+                    onDragLeave={(e) => dragBoardLeaveHandler(e, board)}
+                    onDragStart={(e) => dragBoardStartHandler(e, board)}
+                    onDragEnd={(e) => dragBoardEndHandler(e)}
+                    onDrop={(e) => dropBoardHandler(e, board)}
+                    draggable={true}
+                    board={board}
+                    addItemHandler={addItemHandler}
+                    deleteBoardHandler={deleteBoardHandler}
+                >
+                    {board.items.map(item =>
+                        <Item
+                            onDragOver={(e) => dragItemOverHandler(e, board)}
+                            onDragEnter={(e) => dragItemEnterHandler(e, board, item)}
+                            onDragLeave={(e) => dragItemLeaveHandler(e, board, item)}
+                            onDragStart={(e) => dragItemStartHandler(e, board, item)}
+                            onDragEnd={(e) => dragItemEndHandler(e)}
+                            onDrop={(e) => dropItemHandler(e, board, item)}
+                            item={item}
+                            boardId={board.id}
+                            draggable={true}
+                            deleteItemHandler={deleteItemHandler}
+                        />
+                    )}
+                </Board>
             )}
-        </div>
+            <AddBoard addBoardHandler={addBoardHandler} />
+        </div >
+        // <div className={s.dragAndDrop}>
+        //     {boards.map(board =>
+        //         <div className={s.board}>
+        //             <div className={s.board__header}
+        //                 onDragOver={(e) => dragBoardOverHandler(e, board)}
+        //                 onDragEnter={(e) => dragBoardEnterHandler(e, board)}
+        //                 onDragLeave={(e) => dragBoardLeaveHandler(e, board)}
+        //                 onDragStart={(e) => dragBoardStartHandler(e, board)}
+        //                 onDragEnd={(e) => dragBoardEndHandler(e)}
+        //                 onDrop={(e) => dropBoardHandler(e, board)}
+        //                 draggable={true}
+        //             >
+        //                 {board.title}
+        //             </div>
+        //             <div className={s.board__content}>
+        //                 {board.items.map(item =>
+        //                     <Item
+        //                         onDragOver={(e) => dragItemOverHandler(e, board)}
+        //                         onDragEnter={(e) => dragItemEnterHandler(e, board, item)}
+        //                         onDragLeave={(e) => dragItemLeaveHandler(e, board, item)}
+        //                         onDragStart={(e) => dragItemStartHandler(e, board, item)}
+        //                         onDragEnd={(e) => dragItemEndHandler(e)}
+        //                         onDrop={(e) => dropItemHandler(e, board, item)}
+        //                         text={item.title}
+        //                         draggable={true}
+        //                     />
+        //                 )}
+        //             </div>
+        //         </div>
+        //     )}
+        // </div>
     )
 }
 

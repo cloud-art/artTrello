@@ -18,6 +18,21 @@
     }
 }
 
+.grey{
+    color: var(--color-grey-darkest);
+    &:hover{
+        background-color: var(--color-grey)!important; 
+    }
+}
+
+.blue{
+    color: var(--color-white);
+    background-color: var(--color-blue);
+    &:hover{
+        background-color: var(--color-blue-dark) !important;
+    }
+}
+
 .image{
     font-size: 18px;
     padding-left: 5px;

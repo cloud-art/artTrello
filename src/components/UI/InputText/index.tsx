@@ -22,7 +22,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(({ classNa
                 onChange={onChange}
                 {...props}
             />
-            {errorMessage && <span className={s.errorMessage}>{errorMessage}</span>}
+            {errorMessage != '' && <span className={s.errorMessage}>{errorMessage}</span>}
         </label>
     );
 });

@@ -1,0 +1,22 @@
+$boardRadius: 20px;
+
+.addBoard{
+    width: 274px;
+    height: fit-content;
+    background-color: rgba(var(--color-grey-rgb-value), 0.5);
+    border-radius: $boardRadius;
+}
+
+.button{
+    padding: 15px !important;
+    width: 100%;
+    align-self: center;
+    font-size: medium;
+    color: var(--color-white);
+    border-radius: $boardRadius;
+}
+
+.form{
+    border-radius: $boardRadius;
+    background-color: var(--color-white);
+}

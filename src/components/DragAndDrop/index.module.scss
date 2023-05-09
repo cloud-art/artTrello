@@ -1,41 +1,13 @@
-$boardBorderRadius: 5px;
+$boardBorderRadius: 20px;
 .dragAndDrop{
-display: flex;
+    display: flex;
+    overflow: auto;
+    height: 100%;
 }
 
-.board{
-    position: relative;
-    width: 200px;
-    margin: 20px;
-    border: 1px solid black;
-    border-radius: $boardBorderRadius;
-
-    transition: 0.3s;
-
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-.board__header{
-    padding: 10px;
-    border-bottom: 1px solid black;
-    cursor: pointer;
-}
-
-.board__content{
-    padding: 10px;
-}
-
-.dragImage{
-    cursor: pointer;
-    background-color: red;
-}
 
 .placeholder{
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(0, 0, 0 , 0.5);
     color: transparent;
 }
 

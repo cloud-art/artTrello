@@ -2,20 +2,17 @@ $itemWidth: 100%;
 $itemHeight: 30px;
 $itemTransition: 0.3s;
 
-.itemWrapper{
-    &:not(:last-child){
-        margin-bottom: 10px;
-    }
-}
-
 .item{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: $itemWidth;
     height: $itemHeight;
-    border: 1px solid pink;
+    margin-bottom: 10px;
+    border: 1px solid var(--color-grey);
+    box-shadow: -1px 2px 2px var(--color-grey);
     border-radius: 5px;
+    padding: 20px;
     cursor: pointer;
 
     transition: $itemTransition;
@@ -26,18 +23,14 @@ $itemTransition: 0.3s;
     -webkit-user-select: none;
     user-select: none;
 
-    &:not(:last-child){
-        margin-bottom: 10px;
-    }
-    &Dragged{
-        display: none;
+    &:hover{
+        background-color: var(--color-grey);
     }
 }
 
-.placeholder{
-    width: $itemWidth;
-    height: $itemHeight;
-    border-radius: 5px;
-    background-color: rgba(128, 128, 128, 1);
-    transition: $itemTransition;
+.button{
+    color: var(--color-grey-dark);
+    &:hover{
+        color: var(--color-grey-darkest)
+    }
 }

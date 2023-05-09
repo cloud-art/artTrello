@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 import s from './index.module.scss'
 import Button from '../Button'
 import { FiChevronDown } from 'react-icons/fi'
 import classNames from 'classnames';
 
-interface DropdownButtonProps {
+interface DropdownButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: 'chevronDown';
     variant?: 'active';
     classname?: string;
+    color?: 'grey' | 'blue';
 }
 
 const DropdownButton: React.FC<React.PropsWithChildren<DropdownButtonProps>> = ({
@@ -15,10 +16,21 @@ const DropdownButton: React.FC<React.PropsWithChildren<DropdownButtonProps>> = (
     icon,
     variant,
     classname,
+    color,
+    ...props
 }) => {
 
     return (
-        <Button classname={classNames(s.openButton, variant === 'active' && s.openButtonActive, classname)}>
+        <Button
+            classname={classNames(
+                variant === 'active' && s.openButtonActive,
+                color === 'grey' && s.grey,
+                color === 'blue' && s.blue,
+                s.openButton,
+                classname
+            )}
+            {...props}
+        >
             {children}
             {icon === 'chevronDown' && <FiChevronDown className={s.image} />}
         </Button>
