@@ -1,4 +1,4 @@
-import React, { FC, ReactComponentElement, ReactNode } from 'react';
+import React from 'react';
 
 export default interface IRouter {
     path: string;
