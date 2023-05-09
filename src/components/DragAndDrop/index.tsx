@@ -76,7 +76,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
         if (!grabbedItemBoard || !grabbedItem) return
         //элемент под курсором становится placeholder
         // если это другая доска, удаляем из предыдущей элемент и вставляем его в эту доску
-        (e.target as HTMLElement).classList.add(s.placeholder)
+        (e.target as HTMLDivElement)?.classList.add(s.placeholder)
         // если это другая доска, удаляем из предыдущей элемент и вставляем его в эту доску
         if (board.id !== grabbedItemBoard.id) {
             // индекс элемента на который мы навелись

@@ -5,10 +5,13 @@ $boardBorderRadius: 20px;
     height: 100%;
 }
 
-
 .placeholder{
     background-color: rgb(0, 0, 0 , 0.5);
     color: transparent;
+}
+
+.placeholder *{
+    display: none;
 }
 
 .board__placeholder{
