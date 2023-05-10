@@ -6,18 +6,24 @@ $boardBorderRadius: 20px;
 }
 
 .placeholder{
+    height: 100%;
     background-color: rgb(0, 0, 0 , 0.5);
-    color: transparent;
 }
 
 .placeholder *{
-    display: none;
+    position: relative;
+    left: -1000px;
+
 }
 
 .board__placeholder{
     opacity: 0.1;
     border-radius: $boardBorderRadius;
-
     color: transparent;
-    transition: 0.3s;
+}
+
+.board__header__placeholder *{
+    position: relative;
+    left: -1000px;
+
 }

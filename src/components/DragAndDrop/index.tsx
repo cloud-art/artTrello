@@ -157,7 +157,8 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
         e.preventDefault()
         if (grabbedBoard == null || e.dataTransfer?.getData("text") !== 'Board') return
         // элемент под мышкой становится placeholder
-        (e.target as HTMLElement).parentElement?.classList.add(s.board__placeholder)
+        (e.target as HTMLElement).parentElement?.classList.add(s.board__placeholder);
+        (e.target as HTMLElement).classList.add(s.board__header__placeholder);
         //Меняем местами взятый элемент и тот, под которым находимся
         const currentIndex = boards.indexOf(grabbedBoard)
         const boardIndex = boards.indexOf(board)
@@ -169,7 +170,8 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     const dragBoardLeaveHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         e.preventDefault();
         //убираем placeholder
-        (e.target as HTMLElement).parentElement?.classList.remove(s.board__placeholder)
+        (e.target as HTMLElement).parentElement?.classList.remove(s.board__placeholder);
+        (e.target as HTMLElement).classList.remove(s.board__header__placeholder);
     }
     const dragBoardStartHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         // e.preventDefault()
@@ -184,7 +186,8 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     const dropBoardHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         e.preventDefault();
         //убираем placeholder и очищаем state
-        (e.target as HTMLElement).parentElement?.classList.remove(s.board__placeholder)
+        (e.target as HTMLElement).parentElement?.classList.remove(s.board__placeholder);
+        (e.target as HTMLElement).classList.remove(s.board__header__placeholder);
         setGrabbedBoard(null)
     }
 

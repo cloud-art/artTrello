@@ -1,4 +1,4 @@
-$boardBorderRadius: 20px;
+$boardBorderRadius: 15px;
 
 .board{
     position: relative;
@@ -57,7 +57,7 @@ $boardBorderRadius: 20px;
 }
 
 .input input{
-    // padding: 5px !important;
+    padding: 10px !important;
     height: 100%;
     width: 100%;
 }
