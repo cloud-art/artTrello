@@ -67,15 +67,10 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     const [grabbedItem, setGrabbedItem] = useState<IBoardItem | null>(null)
     const [grabbedItemBoard, setGrabbedItemBoard] = useState<IBoard | null>(null)
 
-    const dragItemOverHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
-        // e.preventDefault()
-    }
-
     const dragItemEnterHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard, item: IBoardItem) => {
         e.preventDefault();
-        if (!grabbedItemBoard || !grabbedItem) return
+        if (!grabbedItemBoard || !grabbedItem || e.dataTransfer?.getData("text") !== 'Item') return
         //элемент под курсором становится placeholder
-        // если это другая доска, удаляем из предыдущей элемент и вставляем его в эту доску
         (e.target as HTMLDivElement)?.classList.add(s.placeholder)
         // если это другая доска, удаляем из предыдущей элемент и вставляем его в эту доску
         if (board.id !== grabbedItemBoard.id) {
@@ -117,8 +112,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
         //инициализируем взятый элемент и доску над которой мы двигаемся
         setGrabbedItemBoard(board)
         setGrabbedItem(item);
-        // setDraggedType('IBoardItem')
-        // e.dataTransfer
+        e.dataTransfer?.setData("text", 'Item')
     }
     const dragItemEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
         //очищаем state
@@ -133,12 +127,12 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
         setGrabbedItem(null)
     }
 
-    const dragBoardOverHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
-        e.preventDefault()
+    const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
     }
     const dragBoardEnterHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         e.preventDefault()
-        if (grabbedBoard == null) return
+        if (grabbedBoard == null || e.dataTransfer?.getData("text") !== 'Board') return
         // элемент под мышкой становится placeholder
         (e.target as HTMLElement).parentElement?.classList.add(s.board__placeholder)
         //Меняем местами взятый элемент и тот, под которым находимся
@@ -157,6 +151,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     const dragBoardStartHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         // e.preventDefault()
         setGrabbedBoard(board)
+        e.dataTransfer?.setData("text", 'Board')
     }
     const dragBoardEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
@@ -170,11 +165,19 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
         setGrabbedBoard(null)
     }
 
+    const dragBoardOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
+        e.isDefaultPrevented()
+    }
+    const dragItemOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
+        e.isDefaultPrevented()
+    }
+
+
     return (
         <div className={classNames(classname, s.dragAndDrop)}>
             {boards.map(board =>
                 <Board
-                    onDragOver={(e) => dragBoardOverHandler(e, board)}
+                    onDragOver={(e) => dragBoardOverHandler(e)}
                     onDragEnter={(e) => dragBoardEnterHandler(e, board)}
                     onDragLeave={(e) => dragBoardLeaveHandler(e, board)}
                     onDragStart={(e) => dragBoardStartHandler(e, board)}
@@ -187,7 +190,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
                 >
                     {board.items.map(item =>
                         <Item
-                            onDragOver={(e) => dragItemOverHandler(e, board)}
+                            onDragOver={(e) => dragItemOverHandler(e)}
                             onDragEnter={(e) => dragItemEnterHandler(e, board, item)}
                             onDragLeave={(e) => dragItemLeaveHandler(e, board, item)}
                             onDragStart={(e) => dragItemStartHandler(e, board, item)}
@@ -203,37 +206,6 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
             )}
             <AddBoard addBoardHandler={addBoardHandler} />
         </div >
-        // <div className={s.dragAndDrop}>
-        //     {boards.map(board =>
-        //         <div className={s.board}>
-        //             <div className={s.board__header}
-        //                 onDragOver={(e) => dragBoardOverHandler(e, board)}
-        //                 onDragEnter={(e) => dragBoardEnterHandler(e, board)}
-        //                 onDragLeave={(e) => dragBoardLeaveHandler(e, board)}
-        //                 onDragStart={(e) => dragBoardStartHandler(e, board)}
-        //                 onDragEnd={(e) => dragBoardEndHandler(e)}
-        //                 onDrop={(e) => dropBoardHandler(e, board)}
-        //                 draggable={true}
-        //             >
-        //                 {board.title}
-        //             </div>
-        //             <div className={s.board__content}>
-        //                 {board.items.map(item =>
-        //                     <Item
-        //                         onDragOver={(e) => dragItemOverHandler(e, board)}
-        //                         onDragEnter={(e) => dragItemEnterHandler(e, board, item)}
-        //                         onDragLeave={(e) => dragItemLeaveHandler(e, board, item)}
-        //                         onDragStart={(e) => dragItemStartHandler(e, board, item)}
-        //                         onDragEnd={(e) => dragItemEndHandler(e)}
-        //                         onDrop={(e) => dropItemHandler(e, board, item)}
-        //                         text={item.title}
-        //                         draggable={true}
-        //                     />
-        //                 )}
-        //             </div>
-        //         </div>
-        //     )}
-        // </div>
     )
 }
 
