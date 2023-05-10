@@ -31,8 +31,12 @@ const Board: React.FC<PropsWithChildren<BoardProps>> = ({
     useOnClickOutside(boardRef, () => setEdit(false));
 
     const onEditHandler = () => {
-        updateBoardHandler(board.id, value)
-        setEdit(false)
+        if (value !== ''){
+            updateBoardHandler(board.id, value)
+            setEdit(false)
+        } else {
+            setEdit(false)
+        }
     }
 
     useEffect(() => {

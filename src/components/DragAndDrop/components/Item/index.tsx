@@ -27,8 +27,12 @@ const Item: React.FC<ItemProps> = ({
     useOnClickOutside(itemRef, () => setEdit(false));
 
     const onEditHandler = () => {
-        updateItemHandler(boardId, item.id, value)
-        setEdit(false)
+        if (value !== ''){
+            updateItemHandler(boardId, item.id, value)
+            setEdit(false)
+        } else {
+            setEdit(false)
+        }
     }
 
     useEffect(() => {
