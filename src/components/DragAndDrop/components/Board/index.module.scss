@@ -5,12 +5,14 @@ $boardBorderRadius: 20px;
     display: flex;
     flex-direction: column;
     min-width: 272px;
+    max-width: 272px;
     height: fit-content;
     padding: 10px;
     background-color: var(--color-grey-lightest);
     border: 1px solid var(--color-grey);
     border-radius: $boardBorderRadius;
-    
+    word-break: break-all;
+
     transition: 0.3s;
 
     -ms-user-select: none;
@@ -34,6 +36,11 @@ $boardBorderRadius: 20px;
     cursor: pointer;
 }
 
+.edit{
+    display: flex;
+    padding-left: 5px;
+}
+
 .buttonEdit{
     font-size: large !important;
     transition: 0.15s;
@@ -47,4 +54,10 @@ $boardBorderRadius: 20px;
     align-self: center;
     font-size: medium;
     margin-top: 10px !important;
+}
+
+.input input{
+    // padding: 5px !important;
+    height: 100%;
+    width: 100%;
 }

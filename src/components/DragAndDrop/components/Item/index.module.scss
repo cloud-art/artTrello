@@ -7,12 +7,13 @@ $itemTransition: 0.3s;
     align-items: center;
     justify-content: space-between;
     width: $itemWidth;
-    height: $itemHeight;
+    min-height: $itemHeight;
     margin-bottom: 10px;
     border: 1px solid var(--color-grey);
     box-shadow: -1px 2px 2px var(--color-grey);
     border-radius: 5px;
     padding: 20px;
+    word-break: break-all;
     cursor: pointer;
 
     transition: $itemTransition;
@@ -28,19 +29,23 @@ $itemTransition: 0.3s;
     }
 }
 
+.text{
+    width: fit-content;
+}
+
 .edit{
     display: flex;
+    padding-left: 5px;
 }
 
 .input input{
-    border: none !important;
-}
-
-.text{
+    padding: 5px !important;
+    height: 100%;
     width: 100%;
 }
 
 .button{
+    font-size: medium;
     color: var(--color-grey-dark);
     &:hover{
         color: var(--color-grey-darkest)
