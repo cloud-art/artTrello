@@ -28,6 +28,18 @@ $itemTransition: 0.3s;
     }
 }
 
+.edit{
+    display: flex;
+}
+
+.input input{
+    border: none !important;
+}
+
+.text{
+    width: 100%;
+}
+
 .button{
     color: var(--color-grey-dark);
     &:hover{

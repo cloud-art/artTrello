@@ -63,6 +63,29 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
         setBoards([...boards].filter(b => b.id !== boardId))
     }
 
+    const updateItemHandler = (boardId: number, itemId: number, title: string) => {
+        setBoards(boards.map(b => {
+            if (b.id === boardId){
+                b.items.map(element =>{
+                    if (element.id === itemId){
+                        element.title = title
+                        return element
+                    }
+                })
+            }
+            return b;
+        }))
+    }
+
+    const updateBoardHandler = (boardId: number, title: string) => {
+        setBoards(boards.map(b => {
+            if (b.id === boardId){
+                b.title = title
+            }
+            return b;
+        }))
+    }
+
     const [grabbedBoard, setGrabbedBoard] = useState<IBoard | null>(null)
     const [grabbedItem, setGrabbedItem] = useState<IBoardItem | null>(null)
     const [grabbedItemBoard, setGrabbedItemBoard] = useState<IBoard | null>(null)
@@ -187,6 +210,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
                     board={board}
                     addItemHandler={addItemHandler}
                     deleteBoardHandler={deleteBoardHandler}
+                    updateBoardHandler={updateBoardHandler}
                 >
                     {board.items.map(item =>
                         <Item
@@ -200,6 +224,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
                             boardId={board.id}
                             draggable={true}
                             deleteItemHandler={deleteItemHandler}
+                            updateItemHandler={updateItemHandler}
                         />
                     )}
                 </Board>
