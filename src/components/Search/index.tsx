@@ -1,11 +1,11 @@
 import s from './index.module.scss';
 import { FiX, FiSearch, FiChevronLeft } from 'react-icons/fi';
-import InputText from '../UI/InputText';
+import InputText from 'components/UI/InputText';
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import useOnClickOutside from '../../hooks/useOnClickOutside';
-import Button from '../UI/Button';
+import useOnClickOutside from 'hooks/useOnClickOutside';
+import Button from 'components/UI/Button';
 
 interface SearchProps {
     classname?: string;

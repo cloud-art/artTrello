@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import s from './index.module.scss'
-import { IBoard, IBoardItem } from '../../types/IBoard'
+import { IBoard, IBoardItem } from 'types/IBoard'
 import Item from './components/Item'
 import Board from './components/Board'
 import AddBoard from './components/AddBoard'

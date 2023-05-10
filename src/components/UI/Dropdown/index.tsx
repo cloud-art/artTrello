@@ -1,6 +1,6 @@
 import s from './index.module.scss';
 import React, { useRef, useState } from 'react';
-import useOnClickOutside from '../../../hooks/useOnClickOutside';
+import useOnClickOutside from 'hooks/useOnClickOutside';
 import Content from './components/Content';
 import ButtonWrapper from './components/ButtonWrapper';
 

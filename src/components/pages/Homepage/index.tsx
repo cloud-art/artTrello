@@ -1,5 +1,5 @@
 import React from 'react'
-import DragAndDrop from '../../DragAndDrop'
+import DragAndDrop from 'components/DragAndDrop'
 import s from './index.module.scss'
 
 const Homepage = () => {

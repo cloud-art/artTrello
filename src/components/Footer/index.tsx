@@ -2,7 +2,7 @@ import React from 'react';
 import s from './index.module.scss';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { HOMEPAGE_ROUTE } from '../../constants/routes';
+import { HOMEPAGE_ROUTE } from 'constants/routes';
 
 interface FooterProps { }
 

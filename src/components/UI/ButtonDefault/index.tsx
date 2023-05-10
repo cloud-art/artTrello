@@ -4,14 +4,14 @@ import Button from '../Button'
 import { FiChevronDown } from 'react-icons/fi'
 import classNames from 'classnames';
 
-interface DropdownButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonDefaultProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: 'chevronDown';
     variant?: 'active';
     classname?: string;
     color?: 'grey' | 'blue';
 }
 
-const DropdownButton: React.FC<React.PropsWithChildren<DropdownButtonProps>> = ({
+const ButtonDefault: React.FC<React.PropsWithChildren<ButtonDefaultProps>> = ({
     children,
     icon,
     variant,
@@ -37,4 +37,4 @@ const DropdownButton: React.FC<React.PropsWithChildren<DropdownButtonProps>> = (
     )
 }
 
-export default DropdownButton
+export default ButtonDefault

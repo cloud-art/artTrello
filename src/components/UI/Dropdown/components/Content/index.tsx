@@ -1,4 +1,4 @@
-import React, { useEffect, useInsertionEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import s from './index.module.scss'
 import classNames from 'classnames'
 

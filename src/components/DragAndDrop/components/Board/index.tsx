@@ -1,10 +1,10 @@
 import React, { PropsWithChildren, useState } from 'react'
 import s from './index.module.scss'
-import Button from '../../../UI/Button';
-import ButtonDefault from '../../../UI/ButtonDefault';
+import Button from 'components/UI/Button';
+import ButtonDefault from 'components/UI/ButtonDefault';
 import { FiPlus, FiTrash } from 'react-icons/fi';
 import AddForm from '../AddForm';
-import { IBoard, IBoardItem } from '../../../../types/IBoard';
+import { IBoard, IBoardItem } from 'types/IBoard';
 
 interface BoardProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     board: IBoard;

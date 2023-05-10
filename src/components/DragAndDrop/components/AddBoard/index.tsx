@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import s from './index.module.scss'
-import ButtonDefault from '../../../UI/ButtonDefault';
+import ButtonDefault from 'components/UI/ButtonDefault';
 import { FiPlus } from 'react-icons/fi';
 import AddForm from '../AddForm';
 

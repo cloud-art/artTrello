@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import s from './index.module.scss'
-import InputText from '../../../UI/InputText'
-import ButtonDefault from '../../../UI/ButtonDefault'
-import Button from '../../../UI/Button'
+import InputText from 'components/UI/InputText'
+import ButtonDefault from 'components/UI/ButtonDefault'
+import Button from 'components/UI/Button'
 import { FiX } from 'react-icons/fi'
-import { IBoardItem } from '../../../../types/IBoard'
+import { IBoardItem } from 'types/IBoard'
 import classNames from 'classnames'
 
 interface AddFormProps {

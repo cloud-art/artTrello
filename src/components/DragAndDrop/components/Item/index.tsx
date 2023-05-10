@@ -1,8 +1,8 @@
 import React from 'react'
 import s from './index.module.scss'
 import { FiTrash } from 'react-icons/fi';
-import Button from '../../../UI/Button';
-import { IBoardItem } from '../../../../types/IBoard';
+import Button from 'components/UI/Button';
+import { IBoardItem } from 'types/IBoard';
 
 interface ItemProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     item: IBoardItem;
