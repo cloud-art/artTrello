@@ -11,9 +11,7 @@ $boardBorderRadius: 20px;
 }
 
 .placeholder *{
-    position: relative;
-    left: -1000px;
-
+    pointer-events: none;
 }
 
 .board__placeholder{
@@ -23,7 +21,5 @@ $boardBorderRadius: 20px;
 }
 
 .board__header__placeholder *{
-    position: relative;
-    left: -1000px;
-
+    pointer-events: none;
 }
