@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/artTrello/static/css/main.b5659e6d.css",
-    "main.js": "/artTrello/static/js/main.5af402d6.js",
+    "main.css": "/artTrello/static/css/main.7346140e.css",
+    "main.js": "/artTrello/static/js/main.7c242577.js",
     "static/media/logo.svg": "/artTrello/static/media/logo.461905f9c6e498db730080d785182cfa.svg",
     "index.html": "/artTrello/index.html",
-    "main.b5659e6d.css.map": "/artTrello/static/css/main.b5659e6d.css.map",
-    "main.5af402d6.js.map": "/artTrello/static/js/main.5af402d6.js.map"
+    "main.7346140e.css.map": "/artTrello/static/css/main.7346140e.css.map",
+    "main.7c242577.js.map": "/artTrello/static/js/main.7c242577.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5659e6d.css",
-    "static/js/main.5af402d6.js"
+    "static/css/main.7346140e.css",
+    "static/js/main.7c242577.js"
   ]
 }
