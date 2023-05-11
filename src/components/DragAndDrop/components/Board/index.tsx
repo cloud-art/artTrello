@@ -46,15 +46,25 @@ const Board: React.FC<PropsWithChildren<BoardProps>> = ({
     return (
         <div className={s.board}>
             <div className={s.header} ref={boardRef} {...props} draggable={isEdit? false : props.draggable}>
-                <div className={s.text}>
-                    {isEdit && <InputText className={s.input} value={value} onChange={(e) => {setValue(e.target.value)}}/>}
-                    {!isEdit && board.title}
-                </div>
-                <div className={s.edit}>
-                    {isEdit && <Button classname={s.buttonEdit} onClick={onEditHandler}><FiCheck /></Button>}
-                    {!isEdit && <Button classname={s.buttonEdit} onClick={() => {setEdit(true)}}><FiEdit2 /></Button>}
-                    {!isEdit && <Button classname={s.buttonEdit} onClick={() => { deleteBoardHandler(board.id) }}><FiTrash /></Button>}
-                </div>
+                {!isEdit && 
+                    <>
+                    <div className={s.text}>
+                        {isEdit && <InputText className={s.input} value={value} onChange={(e) => {setValue(e.target.value)}}/>}
+                        {!isEdit && board.title}
+                    </div>
+                    <div className={s.edit}>
+                        {isEdit && <Button classname={s.buttonEdit} onClick={onEditHandler}><FiCheck /></Button>}
+                        {!isEdit && <Button classname={s.buttonEdit} onClick={() => {setEdit(true)}}><FiEdit2 /></Button>}
+                        {!isEdit && <Button classname={s.buttonEdit} onClick={() => { deleteBoardHandler(board.id) }}><FiTrash /></Button>}
+                    </div>
+                    </>
+                }
+                {isEdit &&
+                    <form className={s.form} onSubmit={(e) => {e.preventDefault(); onEditHandler()}}>
+                        <InputText className={s.input} onSubmit={onEditHandler} value={value} onChange={(e) => {setValue(e.target.value)}}/>
+                        <Button classname={s.buttonEdit} onClick={onEditHandler}><FiCheck /></Button>
+                    </form>
+                }
             </div>
             <div className={s.content}>
                 {children}

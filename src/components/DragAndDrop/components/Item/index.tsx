@@ -41,15 +41,23 @@ const Item: React.FC<ItemProps> = ({
 
     return (
         <div className={s.item} ref={itemRef} {...props} draggable={isEdit? false : props.draggable} >
+            {!isEdit && 
+            <>
             <div className={s.text}>
-                {!isEdit && item.title}
-                {isEdit && <InputText className={s.input} value={value} onChange={(e) => {setValue(e.target.value)}}/>}
+                {item.title}
             </div>
             <div className={s.edit}>
-                {isEdit && <Button classname={s.button} onClick={onEditHandler}><FiCheck /></Button>}
-                {!isEdit && <Button classname={s.button} onClick={() => { setEdit(true) }}><FiEdit2/></Button>}
-                {!isEdit && <Button classname={s.button} onClick={() => { deleteItemHandler(boardId, item.id) }}><FiTrash /></Button>}
+                <Button classname={s.button} onClick={() => { setEdit(true) }}><FiEdit2/></Button>
+                <Button classname={s.button} onClick={() => { deleteItemHandler(boardId, item.id) }}><FiTrash /></Button>
             </div>
+            </> 
+            }
+            {isEdit &&
+                <form className={s.form} onSubmit={(e) => {e.preventDefault(); onEditHandler()}}>
+                    <InputText className={s.input} onSubmit={onEditHandler} value={value} onChange={(e) => {setValue(e.target.value)}}/>
+                    <Button classname={s.button} onClick={onEditHandler}><FiCheck /></Button>
+                </form>
+            }
         </div>
     )
 }

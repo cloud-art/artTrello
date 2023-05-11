@@ -33,7 +33,7 @@ const AddForm: React.FC<AddFormProps> = ({ title, addItemHandler, addBoardHandle
     }
 
     return (
-        <form className={classNames(s.form, classname)}>
+        <form className={classNames(s.form, classname)} onSubmit={(e) => {e.preventDefault(); onClickHandler()}}>
             <InputText errorMessage={error ? 'Введите название' : ''} value={value} onChange={(e) => { setValue(e.target.value) }}></InputText>
             <div className={s.footer}>
                 <ButtonDefault color='blue' classname={s.buttonAdd} onClick={onClickHandler}>{title}</ButtonDefault>
