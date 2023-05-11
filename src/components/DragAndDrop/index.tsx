@@ -226,6 +226,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
         <div className={classNames(classname, s.dragAndDrop)}>
             {boards.map(board =>
                 <Board
+                    key={`board${board.id}`}
                     onDragOver={(e) => dragBoardOverHandler(e)}
                     onDragEnter={(e) => dragBoardEnterHandler(e, board)}
                     onDragLeave={(e) => dragBoardLeaveHandler(e)}
@@ -240,6 +241,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
                 >
                     {board.items.map(item =>
                         <Item
+                            key={`item${item.id}`}
                             onDragOver={(e) => dragItemOverHandler(e)}
                             onDragEnter={(e) => dragItemEnterHandler(e, board, item)}
                             onDragLeave={(e) => dragItemLeaveHandler(e)}
