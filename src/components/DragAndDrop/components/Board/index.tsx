@@ -49,18 +49,16 @@ const Board: React.FC<PropsWithChildren<BoardProps>> = ({
                 {!isEdit && 
                     <>
                     <div className={s.text}>
-                        {isEdit && <InputText className={s.input} value={value} onChange={(e) => {setValue(e.target.value)}}/>}
-                        {!isEdit && board.title}
+                        {board.title}
                     </div>
                     <div className={s.edit}>
-                        {isEdit && <Button classname={s.buttonEdit} onClick={onEditHandler}><FiCheck /></Button>}
-                        {!isEdit && <Button classname={s.buttonEdit} onClick={() => {setEdit(true)}}><FiEdit2 /></Button>}
-                        {!isEdit && <Button classname={s.buttonEdit} onClick={() => { deleteBoardHandler(board.id) }}><FiTrash /></Button>}
+                        <Button classname={s.buttonEdit} onClick={() => {setEdit(true)}}><FiEdit2 /></Button>
+                        <Button classname={s.buttonEdit} onClick={() => { deleteBoardHandler(board.id) }}><FiTrash /></Button>
                     </div>
                     </>
                 }
                 {isEdit &&
-                    <form className={s.formName} onSubmit={(e) => {e.preventDefault(); onEditHandler()}}>
+                    <form className={s.formEdit} onSubmit={(e) => {e.preventDefault(); onEditHandler()}}>
                         <InputText className={s.input} onSubmit={onEditHandler} value={value} onChange={(e) => {setValue(e.target.value)}}/>
                         <Button classname={s.buttonEdit} onClick={onEditHandler}><FiCheck /></Button>
                     </form>

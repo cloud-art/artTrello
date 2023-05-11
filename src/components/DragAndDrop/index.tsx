@@ -36,12 +36,14 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     ])
 
     const addItemHandler = (boardId: number, title: string) => {
-        // Ищем максимальное в каждом списке и потом максимальное среди них
-        let itemId = Math.max(...boards.map(b => {
-            return Math.max(...b.items.map(element => {
-                return element.id
-            }))
-        })) + 1
+        // Ищем максимальное в каждом списке и потом максимальное среди них, если массив не пустой
+        let itemId = 1;
+        if (boards.length !== 0)
+            itemId = Math.max(...boards.map(b => {
+                return Math.max(...b.items.map(element => {
+                    return element.id
+                }))
+            })) + 1
         //добавляем данные
         setBoards(boards.map(b => {
             if (b.id == boardId) {
@@ -62,8 +64,10 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     }
 
     const addBoardHandler = (title: string) => {
-        //ищем максимальный id
-        let boardId = Math.max(...boards.map(b => { return b.id })) + 1
+        //ищем максимальный id, если массив не пустой
+        let boardId = 1;
+        if (boards.length !== 0)
+            boardId = Math.max(...boards.map(b => { return b.id })) + 1
         //добавляем данные
         setBoards([...boards, { id: boardId, title: title, items: [] }])
     }
