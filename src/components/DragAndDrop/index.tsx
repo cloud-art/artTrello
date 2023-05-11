@@ -98,7 +98,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
 
     const dragItemEnterHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard, item: IBoardItem) => {
         e.preventDefault();
-        if (!grabbedItemBoard || !grabbedItem || e.dataTransfer?.getData("text") !== 'Item') return
+        if (!grabbedItemBoard || !grabbedItem || e.dataTransfer?.types[0] !== 'item') return
         //элемент под курсором становится placeholder
         (e.target as HTMLDivElement)?.classList.add(s.placeholder)
         // если это другая доска, удаляем из предыдущей элемент и вставляем его в эту доску
@@ -141,8 +141,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
         //инициализируем взятый элемент и доску над которой мы двигаемся
         setGrabbedItemBoard(board)
         setGrabbedItem(item);
-        e.dataTransfer?.setData("text", 'Item')
-        e.dataTransfer?.setData("type", 'Item',)
+        e.dataTransfer?.setData("item", '')
     }
     const dragItemEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
         //очищаем state
@@ -165,7 +164,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
 
     const dragBoardEnterHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         e.preventDefault()
-        if (grabbedBoard == null || e.dataTransfer?.getData("text") !== 'Board') return
+        if (grabbedBoard == null || e.dataTransfer?.types[0] !== 'board') return
         // элемент под мышкой становится placeholder
         (e.target as HTMLElement).parentElement?.classList.add(s.board__placeholder);
         (e.target as HTMLElement).classList.add(s.board__header__placeholder);
@@ -186,7 +185,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     const dragBoardStartHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
         // e.preventDefault()
         setGrabbedBoard(board)
-        e.dataTransfer?.setData("text", 'Board')
+        e.dataTransfer?.setData("board", '')
     }
     const dragBoardEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
