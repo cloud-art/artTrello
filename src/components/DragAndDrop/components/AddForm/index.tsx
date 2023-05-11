@@ -9,7 +9,7 @@ import classNames from 'classnames'
 
 interface AddFormProps {
     title: string,
-    addItemHandler?: (boardId: number, item: IBoardItem) => void,
+    addItemHandler?: (boardId: number, title: string) => void,
     addBoardHandler?: (title: string) => void,
     setFormVisible: React.Dispatch<React.SetStateAction<boolean>>,
     boardId: number,
@@ -24,7 +24,7 @@ const AddForm: React.FC<AddFormProps> = ({ title, addItemHandler, addBoardHandle
         if (value != '') {
             setError(false)
             addItemHandler &&
-                addItemHandler(boardId, { id: 0, title: value })
+                addItemHandler(boardId, value)
             addBoardHandler &&
                 addBoardHandler(value)
             setValue('')

@@ -10,7 +10,7 @@ import useOnClickOutside from 'hooks/useOnClickOutside';
 
 interface BoardProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     board: IBoard;
-    addItemHandler: (boardId: number, item: IBoardItem) => void;
+    addItemHandler: (boardId: number, title: string) => void;
     deleteBoardHandler: (boardId: number) => void;
     updateBoardHandler: (boardId: number, title: string) => void;
 }

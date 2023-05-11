@@ -50,4 +50,7 @@ $itemTransition: 0.3s;
     &:hover{
         color: var(--color-grey-darkest)
     }
+    &:not(:last-child){
+        padding-right: 5px;
+    }
 }

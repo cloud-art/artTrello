@@ -47,6 +47,9 @@ $boardBorderRadius: 15px;
     &:hover{
         color: var(--color-grey-dark)
     }
+    &:not(:last-child){
+        padding-right: 5px;
+    }
 }
 
 .buttonAdd{
