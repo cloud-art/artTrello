@@ -42,6 +42,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
                 return element.id
             }))
         })) + 1
+        //добавляем данные
         setBoards(boards.map(b => {
             if (b.id == boardId) {
                 b.items.splice(b.items.length, 0, {id: itemId, title: title})
@@ -61,7 +62,9 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     }
 
     const addBoardHandler = (title: string) => {
+        //ищем максимальный id
         let boardId = Math.max(...boards.map(b => { return b.id })) + 1
+        //добавляем данные
         setBoards([...boards, { id: boardId, title: title, items: [] }])
     }
 
@@ -150,12 +153,6 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
     }
     const dropItemHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard, item: IBoardItem) => {
         // e.preventDefault();
-        if(board.items.length === 0){
-            setBoards(boards.map(b => {
-                b.items.push(item)
-                return b
-            })
-        )};
         //убираем placeholder и очищаем state
         (e.target as HTMLElement).classList.remove(s.placeholder)
         setGrabbedItemBoard(null)
@@ -226,7 +223,6 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
         <div className={classNames(classname, s.dragAndDrop)}>
             {boards.map(board =>
                 <Board
-                    key={`board${board.id}`}
                     onDragOver={(e) => dragBoardOverHandler(e)}
                     onDragEnter={(e) => dragBoardEnterHandler(e, board)}
                     onDragLeave={(e) => dragBoardLeaveHandler(e)}
@@ -241,7 +237,6 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ classname }) => {
                 >
                     {board.items.map(item =>
                         <Item
-                            key={`item${item.id}`}
                             onDragOver={(e) => dragItemOverHandler(e)}
                             onDragEnter={(e) => dragItemEnterHandler(e, board, item)}
                             onDragLeave={(e) => dragItemLeaveHandler(e)}
