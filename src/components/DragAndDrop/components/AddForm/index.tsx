@@ -4,7 +4,6 @@ import InputText from 'components/UI/InputText'
 import ButtonDefault from 'components/UI/ButtonDefault'
 import Button from 'components/UI/Button'
 import { FiX } from 'react-icons/fi'
-import { IBoardItem } from 'types/IBoard'
 import classNames from 'classnames'
 
 interface AddFormProps {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import s from './index.module.scss'
-import { FiCheck, FiEdit2, FiPenTool, FiTrash } from 'react-icons/fi';
+import { FiCheck, FiEdit2, FiTrash } from 'react-icons/fi';
 import Button from 'components/UI/Button';
 import { IBoardItem } from 'types/IBoard';
 import InputText from 'components/UI/InputText';

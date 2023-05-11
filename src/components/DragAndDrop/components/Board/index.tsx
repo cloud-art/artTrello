@@ -4,7 +4,7 @@ import Button from 'components/UI/Button';
 import ButtonDefault from 'components/UI/ButtonDefault';
 import { FiCheck, FiEdit2, FiPlus, FiTrash } from 'react-icons/fi';
 import AddForm from '../AddForm';
-import { IBoard, IBoardItem } from 'types/IBoard';
+import { IBoard } from 'types/IBoard';
 import InputText from 'components/UI/InputText';
 import useOnClickOutside from 'hooks/useOnClickOutside';
 
