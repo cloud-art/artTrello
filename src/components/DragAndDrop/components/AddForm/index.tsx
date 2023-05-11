@@ -39,7 +39,6 @@ const AddForm: React.FC<AddFormProps> = ({ title, addItemHandler, addBoardHandle
                 <ButtonDefault color='blue' classname={s.buttonAdd} onClick={onClickHandler}>{title}</ButtonDefault>
                 <Button classname={s.buttonClose} onClick={() => { setFormVisible(false) }}><FiX /></Button>
             </div>
-
         </form>
     )
 }

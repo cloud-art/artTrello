@@ -60,7 +60,7 @@ const Board: React.FC<PropsWithChildren<BoardProps>> = ({
                     </>
                 }
                 {isEdit &&
-                    <form className={s.form} onSubmit={(e) => {e.preventDefault(); onEditHandler()}}>
+                    <form className={s.formName} onSubmit={(e) => {e.preventDefault(); onEditHandler()}}>
                         <InputText className={s.input} onSubmit={onEditHandler} value={value} onChange={(e) => {setValue(e.target.value)}}/>
                         <Button classname={s.buttonEdit} onClick={onEditHandler}><FiCheck /></Button>
                     </form>
@@ -69,7 +69,7 @@ const Board: React.FC<PropsWithChildren<BoardProps>> = ({
             <div className={s.content}>
                 {children}
             </div>
-            {isFormVisible && <AddForm title={'Добавить карточку'} classname={s.form} addItemHandler={addItemHandler} boardId={board.id} setFormVisible={setFormVisible} />}
+            {isFormVisible && <AddForm title={'Добавить карточку'} classname={s.formCard} addItemHandler={addItemHandler} boardId={board.id} setFormVisible={setFormVisible} />}
             {!isFormVisible && <ButtonDefault color='grey' classname={s.buttonAdd} onClick={() => { setFormVisible(true) }}><FiPlus />Добавить карточку</ButtonDefault>}
         </div>
     )
